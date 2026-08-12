@@ -18,14 +18,20 @@
     <section class="pg-hero">
       <div class="pg-hero__media" aria-hidden="true">
         <video
-          class="pg-hero__video"
-          id="pgHeroVideo"
+          class="pg-hero__video is-active"
+          id="pgHeroVideoA"
           muted
-          loop
           playsinline
-          autoplay
           preload="auto">
           <source src="assets/hero/AdobeStock_540825791_Video_HD_Preview.mov" type="video/mp4">
+        </video>
+        <video
+          class="pg-hero__video"
+          id="pgHeroVideoB"
+          muted
+          playsinline
+          preload="auto">
+          <source src="assets/hero/AdobeStock_497817355_Video_HD_Preview.mov" type="video/mp4">
         </video>
         <div class="pg-hero__scrim"></div>
       </div>
@@ -33,9 +39,9 @@
       <a class="pg-hero__brand" href="#" aria-label="Private Greenhouse by TC Control Group">
         <img
           class="pg-hero__logo"
-        src="assets/brand/private-greenhouse-logo-white.png"
-        width="3652"
-        height="1280"
+          src="assets/brand/private-greenhouse-logo-white.png"
+          width="3652"
+          height="1280"
           alt="Private Greenhouse by TC Control Group">
       </a>
 
@@ -71,73 +77,63 @@
         </div>
       </div>
     </section>
-
-    <section class="pg-video-band" aria-label="Greenhouse lifestyle video">
-      <video
-        class="pg-video-band__video"
-        id="pgSecondVideo"
-        muted
-        loop
-        playsinline
-        autoplay
-        preload="metadata">
-        <source src="assets/hero/AdobeStock_497817355_Video_HD_Preview.mov" type="video/mp4">
-      </video>
-    </section>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     (function () {
-      function bindStartAt(video, startAt) {
-        if (!video) return;
+      var videos = [
+        { el: document.getElementById('pgHeroVideoA'), startAt: 4 },
+        { el: document.getElementById('pgHeroVideoB'), startAt: 0 }
+      ];
+      var index = 0;
 
-        function seekToStart() {
-          try {
-            if (video.currentTime < startAt) {
-              video.currentTime = startAt;
-            }
-          } catch (e) {}
-        }
-
-        function playFromStart() {
-          seekToStart();
-          var playPromise = video.play();
-          if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch(function () {});
-          }
-        }
-
-        video.addEventListener('loadedmetadata', function () {
-          seekToStart();
-          playFromStart();
-        });
-
-        video.addEventListener('timeupdate', function () {
-          if (video.currentTime < startAt - 0.05) {
-            video.currentTime = startAt;
-          }
-        });
-
-        video.addEventListener('ended', function () {
-          video.currentTime = startAt;
-          playFromStart();
-        });
-
-        if (video.readyState >= 1) {
-          playFromStart();
-        }
-      }
-
-      bindStartAt(document.getElementById('pgHeroVideo'), 4);
-
-      var second = document.getElementById('pgSecondVideo');
-      if (second) {
-        var playPromise = second.play();
+      function playSafe(video) {
+        var playPromise = video.play();
         if (playPromise && typeof playPromise.catch === 'function') {
           playPromise.catch(function () {});
         }
       }
+
+      function show(i) {
+        videos.forEach(function (item, n) {
+          item.el.classList.toggle('is-active', n === i);
+          if (n !== i) {
+            item.el.pause();
+          }
+        });
+      }
+
+      function startClip(i) {
+        var item = videos[i];
+        var video = item.el;
+        index = i;
+        show(i);
+
+        function seekAndPlay() {
+          try {
+            if (item.startAt > 0) {
+              video.currentTime = item.startAt;
+            }
+          } catch (e) {}
+          playSafe(video);
+        }
+
+        if (video.readyState >= 1) {
+          seekAndPlay();
+        } else {
+          video.addEventListener('loadedmetadata', seekAndPlay, { once: true });
+          video.load();
+        }
+      }
+
+      videos.forEach(function (item, i) {
+        item.el.addEventListener('ended', function () {
+          startClip((i + 1) % videos.length);
+        });
+      });
+
+      startClip(0);
     })();
   </script>
 </body>
