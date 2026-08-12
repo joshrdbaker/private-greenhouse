@@ -1,0 +1,360 @@
+/* Private Estate landing — light theme layout over Thalia palette */
+
+body.estate-landing {
+  background: var(--bone);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Hide section 2 (grounded story band) on landing variants for now */
+body.estate-landing .grounded,
+body.schools-landing .grounded {
+  display: none;
+}
+
+.landing-brand {
+  position: absolute;
+  top: clamp(1.1rem, 2.6vw, 1.75rem);
+  left: clamp(1.1rem, 3.5vw, 2.5rem);
+  z-index: 20;
+}
+
+.landing-brand__logo {
+  height: clamp(2.75rem, 4.8vw, 3.75rem);
+  width: auto;
+  max-width: min(52vw, 22rem);
+  display: block;
+  object-fit: contain;
+}
+
+.landing {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  padding: clamp(5.5rem, 10vh, 7rem) 0 clamp(3.5rem, 7vw, 5.5rem);
+}
+
+/* Same morning wash as the original Thalia sky */
+.landing-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 74% 12%,
+      rgba(255, 252, 242, 0.9) 0%,
+      rgba(255, 248, 234, 0.45) 6%,
+      rgba(255, 244, 226, 0) 20%
+    ),
+    radial-gradient(
+      circle at 74% 12%,
+      rgba(230, 222, 210, 0.22) 0%,
+      rgba(230, 222, 210, 0) 55%
+    ),
+    linear-gradient(
+      180deg,
+      #f8f5f0 0%,
+      #ede8df 22%,
+      #e2d9ca 48%,
+      #d4c8b2 74%,
+      #c8ba9e 100%
+    );
+}
+
+.landing-sky::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  background:
+    radial-gradient(
+      ellipse 32% 22% at 20% 14%,
+      rgba(235, 222, 200, 0.48) 0%,
+      rgba(235, 222, 200, 0) 72%
+    ),
+    radial-gradient(
+      ellipse 26% 20% at 48% 22%,
+      rgba(242, 232, 214, 0.4) 0%,
+      rgba(242, 232, 214, 0) 75%
+    ),
+    radial-gradient(
+      ellipse 34% 24% at 88% 30%,
+      rgba(222, 208, 182, 0.42) 0%,
+      rgba(222, 208, 182, 0) 72%
+    ),
+    radial-gradient(
+      ellipse 28% 22% at 12% 46%,
+      rgba(232, 218, 195, 0.32) 0%,
+      rgba(232, 218, 195, 0) 75%
+    ),
+    radial-gradient(
+      ellipse 30% 24% at 62% 56%,
+      rgba(228, 214, 190, 0.28) 0%,
+      rgba(228, 214, 190, 0) 78%
+    );
+  mix-blend-mode: screen;
+  filter: blur(2px);
+  animation: dapple-drift-a 18s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.landing-sky::after {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  background:
+    radial-gradient(
+      circle at 32% 8%,
+      rgba(255, 246, 220, 0.7) 0%,
+      rgba(255, 246, 220, 0) 8%
+    ),
+    radial-gradient(
+      circle at 58% 16%,
+      rgba(255, 240, 210, 0.55) 0%,
+      rgba(255, 240, 210, 0) 6%
+    ),
+    radial-gradient(
+      circle at 80% 6%,
+      rgba(255, 244, 216, 0.6) 0%,
+      rgba(255, 244, 216, 0) 7%
+    ),
+    radial-gradient(
+      ellipse 30% 20% at 6% 16%,
+      rgba(168, 178, 150, 0.22) 0%,
+      rgba(168, 178, 150, 0) 75%
+    ),
+    radial-gradient(
+      ellipse 36% 22% at 38% 52%,
+      rgba(152, 166, 138, 0.2) 0%,
+      rgba(152, 166, 138, 0) 78%
+    );
+  mix-blend-mode: soft-light;
+  filter: blur(1px);
+  animation: dapple-drift-b 26s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.landing-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.landing-inner {
+  position: relative;
+  z-index: 2;
+  width: min(1200px, calc(100% - 2.5rem));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+  overflow: visible;
+}
+
+.landing-copy {
+  max-width: 34rem;
+  text-align: left;
+}
+
+.landing-eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  line-height: 1;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(26, 35, 50, 0.62);
+}
+
+.landing-eyebrow__logo {
+  display: block;
+  height: 1.65rem;
+  width: auto;
+  margin: 0;
+}
+
+.landing-title {
+  margin: 0 0 1.15rem;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: clamp(2.35rem, 5vw, 3.75rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #1a2332;
+}
+
+.landing-subhead {
+  margin: 0 0 1.5rem;
+  max-width: 30rem;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(26, 35, 50, 0.78);
+}
+
+.landing-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.85rem 1.35rem;
+  background: #00918a;
+  border: 1px solid #00918a;
+  box-shadow: 0 8px 24px rgba(0, 145, 138, 0.22);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.landing-cta:hover,
+.landing-cta:focus-visible {
+  background: #007970;
+  border-color: #007970;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.landing-cta:focus-visible {
+  outline: 2px solid #f8951d;
+  outline-offset: 3px;
+}
+
+/* Photo panel — no oval; sun rays can spill outside */
+.landing-oval {
+  position: relative;
+  width: min(100%, 32rem);
+  aspect-ratio: 4 / 5;
+  isolation: isolate;
+  /* Nudge the composition up a touch */
+  transform: translateY(-1.25rem);
+}
+
+.landing-oval__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.landing-oval__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 52% 28%;
+  display: block;
+  transform: none;
+  -webkit-mask-image: none;
+  mask-image: none;
+  margin: 0;
+}
+
+/* Thalia sun-ray glint — overflows the photo */
+.landing-oval__glint.glint {
+  position: absolute;
+  inset: -18% -22%;
+  z-index: 2;
+  overflow: visible;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.landing-oval__glint.glint::before {
+  left: calc(78% - 10vmin);
+  width: 34vmin;
+  top: -28%;
+  height: 165%;
+  filter: blur(10px);
+}
+
+.landing-oval__glint.glint::after {
+  left: calc(64% - 8vmin);
+  width: 24vmin;
+  top: -22%;
+  height: 155%;
+  filter: blur(9px);
+}
+
+.landing-oval__glint .glint-c {
+  left: calc(72% - 7vmin);
+  width: 20vmin;
+  top: -24%;
+  height: 160%;
+  filter: blur(8px);
+}
+
+.landing-oval__glint .glint-d {
+  left: calc(74% - 8vmin);
+  width: 22vmin;
+  top: -20%;
+  height: 158%;
+  filter: blur(9px);
+}
+
+.landing-oval__glint .glint-e {
+  left: calc(86% - 11vmin);
+  width: 28vmin;
+  top: -26%;
+  height: 162%;
+  filter: blur(10px);
+}
+
+@media (max-width: 991.98px) {
+  .landing {
+    min-height: 0;
+    padding: clamp(5rem, 14vw, 6.5rem) 0 3rem;
+  }
+
+  .landing-inner {
+    grid-template-columns: 1fr;
+    width: min(100% - 2rem, 40rem);
+    gap: 2.25rem;
+  }
+
+  .landing-copy {
+    max-width: none;
+    order: 1;
+  }
+
+  .landing-visual {
+    order: 2;
+  }
+
+  .landing-oval {
+    width: min(100%, 22rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-sky::before,
+  .landing-sky::after {
+    animation: none;
+  }
+
+  .landing-cta {
+    transition: none;
+  }
+
+  .landing-cta:hover,
+  .landing-cta:focus-visible {
+    transform: none;
+  }
+}

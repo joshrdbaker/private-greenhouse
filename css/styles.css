@@ -13063,7 +13063,8 @@ select.assessment-input option[disabled]{
 body.page-private-greenhouse{
   background: #0b1020;
   color: #fff;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .pg-hero{
@@ -13261,7 +13262,8 @@ body.page-private-greenhouse{
 
 @media (max-width: 991.98px){
   body.page-private-greenhouse{
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .pg-hero__content{
@@ -13280,14 +13282,37 @@ body.page-private-greenhouse{
   }
 }
 
+.pg-video-band{
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #0b1020;
+}
+
+.pg-video-band__video{
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  object-fit: cover;
+  object-position: center center;
+}
+
 @media (prefers-reduced-motion: reduce){
   .pg-hero__option,
-  .pg-hero__option-cta i{
+  .pg-hero__option-cta i,
+  .pg-hero__cta,
+  .pg-hero__cta i{
     transition: none;
   }
 
   .pg-hero__option:hover,
-  .pg-hero__option:focus-visible{
+  .pg-hero__option:focus-visible,
+  .pg-hero__cta:hover,
+  .pg-hero__cta:focus-visible{
     transform: none;
   }
 }
