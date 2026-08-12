@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Private Greenhouse | TC Controls</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+<body class="theme-light page-private-greenhouse">
+
+  <main class="pg-hero">
+    <div class="pg-hero__media" aria-hidden="true">
+      <video
+        class="pg-hero__video"
+        id="pgHeroVideo"
+        muted
+        loop
+        playsinline
+        autoplay
+        preload="auto">
+        <source src="assets/hero/AdobeStock_540825791_Video_HD_Preview.mov" type="video/mp4">
+      </video>
+      <div class="pg-hero__scrim"></div>
+    </div>
+
+    <a class="pg-hero__brand" href="#" aria-label="Private Greenhouse by TC Control Group">
+      <img
+        class="pg-hero__logo"
+        src="assets/brand/private-greenhouse-logo.png"
+        width="3652"
+        height="1279"
+        alt="Private Greenhouse by TC Control Group">
+    </a>
+
+    <section class="pg-hero__content">
+      <div class="container">
+        <div class="row pg-hero__row align-items-center">
+          <div class="col-lg-6 pg-hero__copy">
+            <h1 class="pg-hero__title">
+              A brighter future,<br>
+              <span class="accent">at your fingertips.</span>
+            </h1>
+            <p class="pg-hero__subhead">Premium Greenhouses for Private Estates, Schools, and Communities. <strong>Delivered ready to grow.</strong></p>
+            <a class="pg-hero__cta" href="#design">Design my greenhouse <i class="bi bi-arrow-right" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="col-lg-5 offset-lg-1 pg-hero__options-col">
+            <nav class="pg-hero__options" aria-label="Choose your greenhouse">
+              <a class="pg-hero__option" href="#private-estate">
+                <span class="pg-hero__option-label">Private Estate</span>
+                <span class="pg-hero__option-cta">Explore <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
+              </a>
+              <a class="pg-hero__option" href="#schools">
+                <span class="pg-hero__option-label">Schools</span>
+                <span class="pg-hero__option-cta">Explore <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
+              </a>
+              <a class="pg-hero__option" href="#intentional-communities">
+                <span class="pg-hero__option-label">Intentional Communities</span>
+                <span class="pg-hero__option-cta">Explore <i class="bi bi-arrow-right" aria-hidden="true"></i></span>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function () {
+      var video = document.getElementById('pgHeroVideo');
+      if (video) {
+        var START_AT = 4;
+
+        function seekToStart() {
+          try {
+            if (video.currentTime < START_AT) {
+              video.currentTime = START_AT;
+            }
+          } catch (e) {}
+        }
+
+        function playFromStart() {
+          seekToStart();
+          var playPromise = video.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(function () {});
+          }
+        }
+
+        video.addEventListener('loadedmetadata', function () {
+          seekToStart();
+          playFromStart();
+        });
+
+        video.addEventListener('timeupdate', function () {
+          if (video.currentTime < START_AT - 0.05) {
+            video.currentTime = START_AT;
+          }
+        });
+
+        video.addEventListener('ended', function () {
+          video.currentTime = START_AT;
+          playFromStart();
+        });
+
+        if (video.readyState >= 1) {
+          playFromStart();
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
